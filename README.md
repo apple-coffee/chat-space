@@ -8,7 +8,7 @@
 |name|String|null: false|
 |password|integer|null: false|
 |email|integer|null: false, unique: true|
-|message_id|integer|null: false, foreign_key: true|
+
 
 ### Association
 - has_many :messages
@@ -16,13 +16,12 @@
 - has_many :groups, through: :groups_users
 
 
-
 ## messagesテーブル
 
 |Column|Type|Options|
 |------|----|-------|
-|text|text|null: false|
-|image|String|null: true|
+|text|text|
+|image|String|
 |user_id|integer|null: false, foreign_key: true|
 |group_id|integer|null: false, foreign_key: true|
 
@@ -36,7 +35,7 @@
 |Column|Type|Options|
 |------|----|-------|
 |name|String|null: false|
-|message_id|integer|null: false, foreign_key: true|
+
 
 ### Association
 - has_many :messages
