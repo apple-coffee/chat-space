@@ -8,8 +8,7 @@
 |name|String|null: false|
 |password|integer|null: false|
 |email|integer|null: false, unique: true|
-|group_id|integer|null: false, foreign_key: true|
-|text_id|integer|null: false, foreign_key: true|
+|message_id|integer|null: false, foreign_key: true|
 
 ### Association
 - has_many :messages
@@ -37,8 +36,7 @@
 |Column|Type|Options|
 |------|----|-------|
 |name|String|null: false|
-|user_id|integer|null: false, foreign_key: true|
-|text_id|integer|null: false, foreign_key: true|
+|message_id|integer|null: false, foreign_key: true|
 
 ### Association
 - has_many :messages
