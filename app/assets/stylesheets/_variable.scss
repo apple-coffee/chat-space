@@ -1,0 +1,12 @@
+/* 複数回使用する色を定義する */
+$letter: white;
+$fade: #999999;
+$gray: #434a54;
+$sky: #38aef0;
+
+@mixin icon {
+  margin-left: 0.3rem;
+  i {
+    color: $letter;
+  }
+}
