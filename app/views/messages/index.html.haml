@@ -14,7 +14,7 @@
               = link_to "#" do
                 = fa_icon "cog"
       .groups
-        %a(href="#" class="group")
+        = link_to "#", class: "group" do
           .group
             %p.group__group-name test-group
             %p.group__latest-message まだメッセージがありません
@@ -27,7 +27,8 @@
         .main-header__left-box
           %h2.main-header__left-box__current-group test-group
           %ul.main-header__left-box__member-list Member：test-user
-        %a(href="#" class="main-header__edit-btn") Edit
+        = link_to "#", class: "main-header__edit-btn" do
+          Edit
       .messages
         .message
           .message__upper-info
@@ -40,11 +41,10 @@
           %p.message__text a
 
       .form
-        %form(class="new_message")
+        %form(class="new_message")   
           .input-box
             %input(placeholder="  type a message" class="input-box__text" type="text")
             %label(class="input-box__image" for="message_image")
-              = link_to "#" do
-                = fa_icon "image"
+              %i(href="#" class="fa fa-image")
               %input(class="input-box__image__file" type="file" name="message[image]" id="message_image")
           %input(type="submit" name="commit" value="Send" class="submit-btn" data-disable-with="Send")
