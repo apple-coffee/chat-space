@@ -22,6 +22,7 @@
       %p.message__text a
 
   .form
+    = form_for [@group, @message] do |f|
     %form(class="new_message")   
       .input-box
         %input(placeholder="  type a message" class="input-box__text" type="text")
