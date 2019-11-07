@@ -123,58 +123,49 @@ body {
               margin-left: 10px;
             }
           }
-          &__text {
-            color: $gray;
-            font-size: 14px;
-            margin-bottom: 10px;
+          .lower-message {
+            margin-top: 10px;
+            &__text {
+              color: $gray;
+              font-size: 14px;
+              margin-bottom: 40px;
+            }  
           }
         }
       }
       .form {
-        height: 50px;
-        padding: 20px 40px;
-        background-color: #ddd;
-        position: relative;
-        bottom: 93px;
-        .new_message {
-          display: flex;
-          .input-box {
-            position: relative;
-            width: 100%;
-            &__text {
-              height: 50px;
-              width: 100%;
-              padding: 0 -10px 0 10px;
-              color: $gray;
-              border-style: none;
-            }
-            &__image {
-              font-size: 1.3rem;
-              position: absolute;
-              top: 10px;
-              right: 10px;
-              cursor: pointer;
-              .fa.fa-image {
-                display: inline-block;
-                font: normal normal normal 14px/1;
-                font-size: inherit;
-                text-rendering: auto;
-                -webkit-font-smoothing: antialiased;
-              }
-              &__file {
-                display: none;
-              }
-            }
+        background-color: #DDDDDD;
+        box-sizing: border-box;
+        height: 90px;
+        padding: 20px 50px 20px 40px;
+        &__message {
+          border: none;
+          float: left;
+          height: 50px;
+          width: calc(100% - 150px);
+        }
+        &__mask {
+          background-color: $letter;
+          float: left;
+          height: 50px;
+          padding-right: 10px;
+          &__image {
+            font-size: 20px;
+            line-height: 50px;
           }
-          .submit-btn {
-            width: 100px;
-            height: 50px;
-            padding: 0 30px;
-            margin-left: 15px;
-            background-color: $sky;
-            color: $letter;
-            cursor: pointer;
+          .hidden {
+            display: none;
           }
+        }
+        &__submit {
+          background-color: $sky;
+          border: none;
+          color: $letter;
+          float: right;
+          font-size: 16px;
+          height: 50px;
+          margin-left: 15px;
+          padding: 0 30px;
         }
       }
     }

@@ -1,16 +1,22 @@
+
+
 .chat-side
   .side-header
     .side-header__box
-      %p.side-header__box__user-name test-user
+      %p.side-header__box__user-name 
+        = current_user.name
       %ul.side-header__box__menu
         %li.side-header__box__menu__new-group
-          = link_to "/groups/:id/edit" do
+          = link_to "/groups/new" do
             = fa_icon "edit"
         %li.side-header__box__menu__edit-user
           = link_to  "/users/#{current_user.id}/edit" do
             = fa_icon "cog"
   .groups
-    = link_to "#", class: "group" do
+    - current_user.groups.each do |group|
       .group
-        %p.group__group-name test-group
-        %p.group__latest-message まだメッセージがありません
+        = link_to group_messages_path(group) do
+          .group__group-name 
+            = group.name
+          .group__latest-message 
+            = group.show_last_message
