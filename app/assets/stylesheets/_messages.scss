@@ -52,13 +52,13 @@ body {
           color: $letter;
           text-decoration: none;
           .group {
-            margin-bottom: 40px;
             &__group-name {
               font-size: 15px;
               margin-bottom: 5px;
             }
             &__latest-message {
               font-size: 11px;
+              margin-bottom: 40px;
             }
           }
         }
@@ -136,7 +136,7 @@ body {
       .form {
         background-color: #DDDDDD;
         box-sizing: border-box;
-        height: 90px;
+        height: 87px;
         padding: 20px 50px 20px 40px;
         &__message {
           border: none;
