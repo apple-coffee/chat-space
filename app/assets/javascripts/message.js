@@ -1,5 +1,7 @@
 $(function(){
   function buildHTML(message){
+    let text = message.text ? `${message.text}` : "";
+    let image = message.image ? `<img src= ${message.image}>` : "";
     let html = `<div class="message">
                   <div class="message__upper-info">
                     <div class="message__upper-info__talker">
@@ -11,10 +13,13 @@ $(function(){
                   </div>
                   <div class="lower-message">
                     <p class="lower-message__text">
-                      ${message.text}
+                      <div>
+                      ${text}
+                      </div>
+                      ${image}
                     </p>
                   </div>
-                </div>`;
+                </div>`
     return html;
   }
   $('#new_comment').on('submit', function(e){
@@ -32,9 +37,17 @@ $(function(){
     .done(function(message){
       let html = buildHTML(message);
       $('.messages').append(html);
-      $('.form__message').val('');
+      $('#new_comment')[0].reset();
       $('.form__submit').prop('disabled', false);
-      $('.message').animate({'height' : '50px'});
+      scrollBottom();
+
+      function scrollBottom() {
+        var target = $('.message').last();
+        var position = target.offset().top + $('.messages').scrollTop();
+        $('.messages').animate({
+          scrollTop: position
+        }, 300, 'swing');
+      }
     })
     .fail(function(){
       alert('メッセージ送信に失敗しました');
