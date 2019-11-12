@@ -109,6 +109,7 @@ body {
         overflow: scroll;
         .message {
           padding-bottom: 40px;
+          height: 65px;
           &__upper-info {
             display: flex;
             margin-bottom: 10px;
@@ -143,6 +144,7 @@ body {
           float: left;
           height: 50px;
           width: calc(100% - 150px);
+          padding-left: 10px;
         }
         &__mask {
           background-color: $letter;
@@ -161,6 +163,9 @@ body {
           background-color: $sky;
           border: none;
           color: $letter;
+          position: relative;
+          bottom: 50px;
+          left: 5px;
           float: right;
           font-size: 16px;
           height: 50px;
