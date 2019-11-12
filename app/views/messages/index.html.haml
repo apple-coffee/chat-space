@@ -8,9 +8,13 @@
         %h2.main-header__left-box__current-group 
           = @group.name
         %ul.main-header__left-box__member-list 
-          Member : 
-      = link_to "#", class: "main-header__edit-btn" do
-        Edit
+          Member :
+          
+
+      %a( href="/groups/1/edit" )
+        .main-header__edit-btn
+          Edit
+
     .messages
       - @messages.each do |message|
         .message
