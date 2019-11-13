@@ -9,6 +9,8 @@
           = @group.name
         %ul.main-header__left-box__member-list 
           Member :
+          - @group.group_users.each do |group_user|
+            = group_user.user.name
           
 
       %a( href="/groups/1/edit" )
@@ -17,7 +19,7 @@
 
     .messages
       - @messages.each do |message|
-        .message
+        %div.message{data: { mesasase: { id: message.id}}}
           .message__upper-info
             .message__upper-info__talker
               = message.user.name
