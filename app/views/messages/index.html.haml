@@ -19,7 +19,7 @@
 
     .messages
       - @messages.each do |message|
-        %div.message{data: { mesasase: { id: message.id}}}
+        .message{data: { mesasase: { id: message.id}}}
           .message__upper-info
             .message__upper-info__talker
               = message.user.name
