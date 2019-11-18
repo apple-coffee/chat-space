@@ -1,5 +1,3 @@
-
-
 .wrapper
   = render "shared/side_bar"
   .chat-main
@@ -11,8 +9,6 @@
           Member :
           - @group.group_users.each do |group_user|
             = group_user.user.name
-          
-
       .main-header__edit-btn
         = link_to "edit" do
           Edit
@@ -30,6 +26,7 @@
               %p.lower-message__text
                 = message.content
             = image_tag message.image.url, class: 'lower-message__image' if message.image.present?
+            
     .form
       = form_for [@group, @message], html: {id: :new_comment} do |f|
         = f.text_field :content, class: 'form__message', placeholder: 'type a message'
