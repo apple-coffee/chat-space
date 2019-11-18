@@ -19,7 +19,7 @@ $(document).on('turbolinks:load', function(){
                       ${image}
                     </p>
                   </div>
-                </div>`
+                </div>`;
     return html;
   }
   $('#new_comment').on('submit', function(e){
