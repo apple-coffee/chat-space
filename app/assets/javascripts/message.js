@@ -1,6 +1,6 @@
-$(document).on('turbolinks:load', function(){
+$(document).on('turbolinks:load', function() {
   function buildHTML(message){
-    let text = message.text ? `${message.text}` : "";
+    let text = message.content ? `${message.content}` : "";
     let image = message.image ? `<img src= ${message.image}>` : "";
     let html = `<div class="message" data-id=${message.id}>
                   <div class="message__upper-info">
@@ -54,10 +54,9 @@ $(document).on('turbolinks:load', function(){
     })
   })
   let reloadMessages = function() {
-    if (location.href == "api/messages" ) {
-      //カスタムデータ属性を利用し、ブラウザに表示されている最新メッセージのidを取得
-      last_message_id = $('.message').data("message-id");
-      $.ajax({
+    //カスタムデータ属性を利用し、ブラウザに表示されている最新メッセージのidを取得
+    let last_message_id = $('.message').last().data("message-id");
+    $.ajax({
         //ルーティングで設定した通り/groups/id番号/api/messagesとなるよう文字列を書く
         url: "api/messages",
         //ルーティングで設定した通りhttpメソッドをgetに指定
@@ -65,8 +64,8 @@ $(document).on('turbolinks:load', function(){
         dataType: 'json',
         //dataオプションでリクエストに値を含める
         data: {id: last_message_id}
-      })
-      .done(function(messages) {
+    })
+    .done(function(messages) {
         //追加するHTMLの入れ物を作る
         let insertHTML = '';
         //配列messagesの中身一つ一つを取り出し、HTMLに変換したものを入れ物に足し合わせる
@@ -76,7 +75,6 @@ $(document).on('turbolinks:load', function(){
         })
         //メッセージを追加
         scrollBottom();
-
         function scrollBottom() {
           let target = $('.message').last();
           let position = target.offset().top + $('.messages').scrollTop();
@@ -84,12 +82,10 @@ $(document).on('turbolinks:load', function(){
             scrollTop: position
           }, 300, 'swing');
         }
-      })
-      .fail(function() {
+    })
+    .fail(function() {
         alert("エラー");
-      });
-    }
-    
+    });
   };
   setInterval(reloadMessages, 7000);
 });
