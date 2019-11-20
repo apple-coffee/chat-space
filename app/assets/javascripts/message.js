@@ -2,7 +2,7 @@ $(document).on('turbolinks:load', function() {
   function buildHTML(message){
     let text = message.content ? `${message.content}` : "";
     let image = message.image ? `<img src= ${message.image}>` : "";
-    let html = `<div class="message" data-id=${message.id}>
+    let html = `<div class="message" data-id="${message.id}">
                   <div class="message__upper-info">
                     <div class="message__upper-info__talker">
                       ${message.name}
@@ -19,7 +19,7 @@ $(document).on('turbolinks:load', function() {
                       ${image}
                     </p>
                   </div>
-                </div>`;
+                </div>`
     return html;
   }
   $('#new_comment').on('submit', function(e){
@@ -52,40 +52,36 @@ $(document).on('turbolinks:load', function() {
     .fail(function(){
       alert('メッセージ送信に失敗しました');
     })
-  })
+  });
   let reloadMessages = function() {
-    //カスタムデータ属性を利用し、ブラウザに表示されている最新メッセージのidを取得
-    let last_message_id = $('.message').last().data("message-id");
-    $.ajax({
-        //ルーティングで設定した通り/groups/id番号/api/messagesとなるよう文字列を書く
-        url: "api/messages",
-        //ルーティングで設定した通りhttpメソッドをgetに指定
-        type: 'get',
-        dataType: 'json',
-        //dataオプションでリクエストに値を含める
-        data: {id: last_message_id}
-    })
-    .done(function(messages) {
-        //追加するHTMLの入れ物を作る
-        let insertHTML = '';
-        //配列messagesの中身一つ一つを取り出し、HTMLに変換したものを入れ物に足し合わせる
-        messages.forEach(function(message) {
-          inserHTML += buildHTML(message);
-          $('.messages').append(insertHTML);
-        })
-        //メッセージを追加
-        scrollBottom();
-        function scrollBottom() {
-          let target = $('.message').last();
-          let position = target.offset().top + $('.messages').scrollTop();
-          $('.messages').animate({
-            scrollTop: position
-          }, 300, 'swing');
-        }
-    })
-    .fail(function() {
-        alert("エラー");
-    });
+    if (window.location.href.match(/\/groups\/\d+\/messages/)) {
+      //カスタムデータ属性を利用し、ブラウザに表示されている最新メッセージのidを取得
+      last_message_id = $('.message').last().data("message-id");
+      let url = `/groups/${group_id}/api/messages`
+      $.ajax({
+          //ルーティングで設定した通り/groups/id番号/api/messagesとなるよう文字列を書く
+          url: url,
+          //ルーティングで設定した通りhttpメソッドをgetに指定
+          type: 'GET',
+          dataType: 'json',
+          //dataオプションでリクエストに値を含める
+          data: {id: last_message_id}
+      })
+      .done(function(messages) {
+          //追加するHTMLの入れ物を作る
+          let insertHTML = '';
+          //配列messagesの中身一つ一つを取り出し、HTMLに変換したものを入れ物に足し合わせる
+          messages.forEach(function(message) {
+            insertHTML += buildHTML(message);
+            $('.messages').append(insertHTML);
+          })
+          $('.messages').animate({scrollTop: $('.messages')[0].scrollHeight}, 'fast');
+      })
+      .fail(function() {
+          alert("エラー");
+      });
+    }
   };
+  
   setInterval(reloadMessages, 7000);
 });
