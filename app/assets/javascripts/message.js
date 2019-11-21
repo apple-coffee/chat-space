@@ -2,7 +2,7 @@ $(document).on('turbolinks:load', function() {
   function buildHTML(message){
     let text = message.content ? `${message.content}` : "";
     let image = message.image ? `<img src= ${message.image}>` : "";
-    let html = `<div class="message" data-id="${message.id}">
+    let html = `<div class="message" data-message-id="${message.id}">
                   <div class="message__upper-info">
                     <div class="message__upper-info__talker">
                       ${message.name}
@@ -39,15 +39,7 @@ $(document).on('turbolinks:load', function() {
       $('.messages').append(html);
       $('#new_comment')[0].reset();
       $('.form__submit').prop('disabled', false);
-      scrollBottom();
-
-      function scrollBottom() {
-        let target = $('.message').last();
-        let position = target.offset().top + $('.messages').scrollTop();
-        $('.messages').animate({
-          scrollTop: position
-        }, 300, 'swing');
-      }
+      $('.messages').animate({scrollTop: $('.messages')[0].scrollHeight}, 'fast');
     })
     .fail(function(){
       alert('メッセージ送信に失敗しました');
@@ -57,10 +49,9 @@ $(document).on('turbolinks:load', function() {
     if (window.location.href.match(/\/groups\/\d+\/messages/)) {
       //カスタムデータ属性を利用し、ブラウザに表示されている最新メッセージのidを取得
       last_message_id = $('.message').last().data("message-id");
-      let url = `/groups/${group_id}/api/messages`
       $.ajax({
           //ルーティングで設定した通り/groups/id番号/api/messagesとなるよう文字列を書く
-          url: url,
+          url: "api/messages",
           //ルーティングで設定した通りhttpメソッドをgetに指定
           type: 'GET',
           dataType: 'json',
