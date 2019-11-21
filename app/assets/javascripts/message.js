@@ -1,7 +1,7 @@
 $(document).on('turbolinks:load', function() {
   function buildHTML(message){
     let text = message.content ? `${message.content}` : "";
-    let image = message.image ? `<img src= ${message.image}>` : "";
+    let image = message.image.url ? `<img src= ${message.image.url} class="lower-message__image"> `: "";
     let html = `<div class="message" data-message-id="${message.id}">
                   <div class="message__upper-info">
                     <div class="message__upper-info__talker">
@@ -48,7 +48,7 @@ $(document).on('turbolinks:load', function() {
   let reloadMessages = function() {
     if (window.location.href.match(/\/groups\/\d+\/messages/)) {
       //カスタムデータ属性を利用し、ブラウザに表示されている最新メッセージのidを取得
-      last_message_id = $('.message').last().data("message-id");
+      let last_message_id = $('.message').last().data("message-id");
       $.ajax({
           //ルーティングで設定した通り/groups/id番号/api/messagesとなるよう文字列を書く
           url: "api/messages",
