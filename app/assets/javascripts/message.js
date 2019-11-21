@@ -22,7 +22,7 @@ $(document).on('turbolinks:load', function() {
                 </div>`
     return html;
   }
-  $('#new_comment').on('submit', function(e){
+  $('#new_comment').on('submit', function(e) {
     e.preventDefault();
     let formData = new FormData(this);
     let url = $(this).attr('action');
@@ -45,7 +45,7 @@ $(document).on('turbolinks:load', function() {
       alert('メッセージ送信に失敗しました');
     })
   });
-  let reloadMessages = function() {
+  let reloadMessages = function(e) {
     if (window.location.href.match(/\/groups\/\d+\/messages/)) {
       //カスタムデータ属性を利用し、ブラウザに表示されている最新メッセージのidを取得
       last_message_id = $('.message').last().data("message-id");
@@ -67,6 +67,7 @@ $(document).on('turbolinks:load', function() {
             $('.messages').append(insertHTML);
           })
           $('.messages').animate({scrollTop: $('.messages')[0].scrollHeight}, 'fast');
+          e.preventDefault();
       })
       .fail(function() {
           alert("エラー");
