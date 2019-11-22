@@ -97,8 +97,11 @@ html {
             border: solid 1px $sky;
             position: absolute;
             right: 40px;
+            a:link {
+              color: $sky;
+            }
             a:visited {
-              color: $sky; text-decoration: none;
+              color: $sky;
             }
           }
         }
