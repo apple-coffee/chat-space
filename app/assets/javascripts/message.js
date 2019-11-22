@@ -1,4 +1,4 @@
-$(document).on('turbolinks:load', function() {
+$(function() {
   function buildHTML(message){
     let text = message.content ? `${message.content}` : "";
     let image = message.image.url ? `<img src= ${message.image.url} class="lower-message__image">`: "";
@@ -60,17 +60,21 @@ $(document).on('turbolinks:load', function() {
       })
       .done(function(messages) {
           //追加するHTMLの入れ物を作る
-          let insertHTML = '';
-          //配列messagesの中身一つ一つを取り出し、HTMLに変換したものを入れ物に足し合わせる
-          messages.forEach(function(message) {
+        let insertHTML = '';
+        //配列messagesの中身一つ一つを取り出し、HTMLに変換したものを入れ物に足し合わせる
+        messages.forEach(function(message) {
+          if (message.id > last_message_id) {
             insertHTML += buildHTML(message);
             $('.messages').append(insertHTML);
-          })
-          $('.messages').animate({scrollTop: $('.messages')[0].scrollHeight}, 'fast');
+            $('.messages').animate({scrollTop: $('.messages')[0].scrollHeight}, 'fast');
+          }
+        });
       })
       .fail(function() {
-          alert("エラー");
+            alert("エラー");
       });
+    } else {
+      clearInterval(interval)
     }
   };
   

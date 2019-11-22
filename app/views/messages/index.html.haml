@@ -10,8 +10,8 @@
           - @group.group_users.each do |group_user|
             = group_user.user.name
       .main-header__edit-btn
-        = link_to "edit" do
-          Edit
+        = link_to "Edit",'edit' 
+          
 
     .messages
       - @messages.each do |message|
